@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="com.shiyq.mybatis.dao.UserDao">
+    <select id="countAll" resultType="int">
+        select count(*) c from info_user;
+    </select>
+    
+    <select id="selectAll" resultType="com.shiyq.mybatis.domain.User">
+        select * from info_user order by user_name asc
+    </select>
+    
+    <insert id="insert" parameterType="com.shiyq.mybatis.domain.User">
+        insert into info_user(user_name,password,comment) values(#{user_name},#{password},#{comment})
+    </insert>
+    
+    <update id="update" parameterType="com.shiyq.mybatis.domain.User">
+        update info_user set user_name=#{user_name},password=#{password},comment=#{comment} where user_name=#{user_name}
+    </update>
+    
+    <delete id="delete" parameterType="String">
+        delete from info_user where user_name=#{user_name}
+    </delete>
+    
+    <select id="findByUserName" parameterType="String" resultType="com.shiyq.mybatis.domain.User">
+        select * from info_user where user_name=#{user_name}
+    </select>
+</mapper>
